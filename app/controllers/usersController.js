@@ -39,8 +39,14 @@ usersController.login = (req, res) => {
                 })
             }
 
-            res.json(user)
-
+            bcryptjs.compare(body.password, user.password)
+                .then((match) => {
+                    if(match) {
+                        res.json(user)
+                    } else {
+                        res.json({ errors: 'invalid email or password'})
+                    }
+                })
         })
 }
 
