@@ -29,5 +29,20 @@ usersController.register = (req, res) => {
     */
 }
 
+usersController.login = (req, res) => {
+    const body = req.body 
+    User.findOne({ email: body.email }) 
+        .then((user) => {
+            if(!user) {
+                res.json({ 
+                    errors: 'invalid email or password'
+                })
+            }
+
+            res.json(user)
+
+        })
+}
+
 
 module.exports = usersController
