@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const bcryptjs = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 const usersController = {}
 
 usersController.register = (req, res) => {
@@ -42,7 +43,15 @@ usersController.login = (req, res) => {
             bcryptjs.compare(body.password, user.password)
                 .then((match) => {
                     if(match) {
-                        res.json(user)
+                        const tokenData = {
+                            _id: user._id,
+                            email: user.email,
+                            username: user.username
+                        }
+                        const token = jwt.sign(tokenData, 'dct123', { expiresIn: '2d'})
+                        res.json({
+                            token: `Bearer ${token}`
+                        })
                     } else {
                         res.json({ errors: 'invalid email or password'})
                     }
