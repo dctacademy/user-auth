@@ -5,5 +5,5 @@ const data = {
     name: 'steve'
 }
 
-const token = jwt.sign(data, 'dct123', { expiresIn: '2h' })
+const token = jwt.sign(data, 'dct123', { expiresIn: '10' })
 console.log(token)
