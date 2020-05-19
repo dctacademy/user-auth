@@ -4,3 +4,4 @@ This repo contains step by step implementation of user authentication from scrat
 ### Packages used 
 * bcryptjs
 * jsonwebtoken
+* validator
